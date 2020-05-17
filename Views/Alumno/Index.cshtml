@@ -16,19 +16,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nombres)
+            Nombre
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Apellidos)
+            Apellidos
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Edad)
+            Edad
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sexo)
+            Sexo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Fecha_Registro)
+            Fecha_Registro
+        </th>
+        <th>
+            Nombre Completo
         </th>
         <th></th>
     </tr>
@@ -38,38 +41,45 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellidos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Edad)
-            </td>
-            <td>
-                @{
-                    if (item.Sexo == "M")
-                    {
-                        <h5>Masculino</h5>
-                    }
-                    else
-                    {
-                        <spam>Femenino</spam>
-                    }
-                }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nombres)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Apellidos)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Edad)
+    </td>
+    <td>
+        @{
+            if (item.Sexo == "M")
+            {
+                <spam>Masculino</spam>
+            }
+            else
+            {
+                <spam>Femenino</spam>
+            }
+        }
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha_Registro)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>
-        </tr>
+    </td>
+    <td>
+        @item.Fecha_Registro.ToShortDateString()
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NombreCompleto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.suma)
+    </td>
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+    </td>
+</tr>
     }
 
 </table>

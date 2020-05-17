@@ -10,12 +10,12 @@
 
 @using (Html.BeginForm()) 
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()<!--this is used to valide if the formulary is correct and avoid another formulary enters to this formulary-->
     
     <div class="form-horizontal">
         <h4>Alumno</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" }) <!--here is where the !ModelStade.isValid return -->
         <div class="form-group">
             @Html.LabelFor(model => model.Nombres, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
