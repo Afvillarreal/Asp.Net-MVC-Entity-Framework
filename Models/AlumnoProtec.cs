@@ -6,13 +6,14 @@ using System.Web;
 
 namespace CRUD_Alumnos.Models
 {
-    public class AlumnoPartial
+    //this class is created in order to protect the model of alumno as everytime we change the model or update, the model will reboot to the origin.
+
+    public class AlumnoProtec
     {
-
-        [Required]                            //it means that this space is obligatory
-        [Display(Name = "Ingrese nombres")]   //this means that if the space is not completed it's gonna show this message
+        [Required]
+        [Display (Name ="Ingrese Nombre")]
         public string Nombres { get; set; }
-
+        
         [Required]
         [Display(Name = "Ingrese Apellidos")]
         public string Apellidos { get; set; }
@@ -26,11 +27,10 @@ namespace CRUD_Alumnos.Models
         public string Sexo { get; set; }
     }
 
-    [MetadataType(typeof(AlumnoPartial))]
+    //[MetadataType(typeof(AlumnoProtec))]
+    public partial class Alumno {
+       
+        public String NombreCompleto {get {return Nombres + " " + Apellidos; } }
+     }
 
-    public partial class Alumno
-    {
-        public String NombreCompleto { get { return Nombres + " " + Apellidos; } }
-        public int suma { get { return Edad + 10; } }
-    }
 }

@@ -10,59 +10,106 @@ namespace CRUD_Alumnos.Controllers
     public class AlumnoController : Controller
     {
         // GET: Alumno
-        public ActionResult Index()
+        public ActionResult IndexdeAlumno()
         {
-                 //AlumnosContext db = new AlumnosContext(); // AlumnoContext fue el nombre de la db al momento de crearla en la parte de elegir conexion a datos parte inferior.           
-                //List<Alumno> lista = db.Alumno.Where(a => a.Edad > 18).ToList();
-
-                try
+            try
+            {
+                using (var db = new AlumnoContexto())
                 {
-                    using (var db = new AlumnosContext())
-                    {
-
-                    //List<Alumno> lista = db.Alumno.Where(a => a.Edad > 18).ToList();
-                    //return (lista);
-
                     return View(db.Alumno.ToList());
-                    }
-                }
-                catch (Exception)
-                {
-                    throw;
                 }
 
+            }
+            catch (Exception )
+            {
+
+                throw;
+            }            
         }
 
-
-        [HttpGet]//si no se conoca nada se sobre entiende que es este metodo
-         
         public ActionResult Agregar()
         {
             return View();
         }
 
-        [HttpPost] //este si hay que colocarlo 
-        [ValidateAntiForgeryToken] // this check if the formulary which is being sending
+        [HttpPost]//this is necesary cause the program wont know which "Agregar" use HttpPost is for set and HttpGet if for get
+        [ValidateAntiForgeryToken]//this is for validate the if the format is correct
         public ActionResult Agregar(Alumno a)
         {
-            if (!ModelState.IsValid)    //@Html.ValidationSummary(true, "", new { @class = "text-danger" }) here return this line in view
-                return View();          //in other words it show somting like "el campo ingrese el nombre es requerido" if case of a person doesn't fill in the space
+            if (!ModelState.IsValid)
+                return View();
+
             try
             {
-                using (var db = new AlumnosContext())//this is the same that above but this is better this using open and close the database in order to use less resources
-                {                                               //when this using ends, the connection to the data also ends
+                using (var db = new AlumnoContexto())
+                {
                     a.Fecha_Registro = DateTime.Now;
+
                     db.Alumno.Add(a);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexdeAlumno");
                 }
+                
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("","Error al agregar el argumento"+ ex.Message);
+            catch (Exception e)
+            {              
+                ModelState.AddModelError("","Error al Crear Alumno"+ e.Message);
                 return View();
             }
-                                      
+           
+        }
+        
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {
+            try
+            {
+                using (var db = new AlumnoContexto())
+                {
+
+                    //Alumno al = db.Alumno.Where(a => a.id == id).FirstOrDefault();//chosse the first which has that condicion and if not exist return a null, Where can be used in what ever case
+                    Alumno al2 = db.Alumno.Find(id);//this do the same but ONLY USE WHEN I KNOW THAT EXIST UNIQUE PRIMARY KEY
+                    return View(al2);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+          
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(Alumno a)
+        {
+
+            if (!ModelState.IsValid)
+                return View();
+
+            try
+            {
+                using(var db = new AlumnoContexto())
+                {
+                    var al = db.Alumno.Find(a.id);
+                    al.Nombres = a.Nombres;
+                    al.Apellidos = a.Apellidos;
+                    al.Edad = a.Edad;
+                    al.Sexo = a.Sexo;
+                    db.SaveChanges();
+
+                    return RedirectToAction("IndexdeAlumno");
+                }
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
     }

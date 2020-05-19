@@ -13,10 +13,10 @@ namespace CRUD_Alumnos.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AlumnosContext : DbContext
+    public partial class AlumnoContexto : DbContext
     {
-        public AlumnosContext()
-            : base("name=AlumnosContext")
+        public AlumnoContexto()
+            : base("name=AlumnoContexto")
         {
         }
     
