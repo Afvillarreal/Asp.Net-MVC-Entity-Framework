@@ -112,5 +112,30 @@ namespace CRUD_Alumnos.Controllers
             
         }
 
+        public ActionResult DetallesUsuario(int id)
+        {
+            using(var db = new AlumnoContexto())
+            {
+                var al = db.Alumno.Find(id);
+                return View(al);
+            }
+            
+        }
+
+        public ActionResult EliminarUsuario(int id)
+        {
+            using (var db = new AlumnoContexto() )
+            {
+                Alumno al = db.Alumno.Find(id);
+                db.Alumno.Remove(al);
+                db.SaveChanges();
+                return View("IndexdeAlumno");
+            }
+        }
+
+
+
+
+
     }
 }
