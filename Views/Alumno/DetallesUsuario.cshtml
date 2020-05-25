@@ -48,15 +48,23 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Sexo)
+            @if (Model.Sexo == "F")
+            {
+                <spam>Femenino</spam>
+            }
+            @if (Model.Sexo == "M")
+            {
+                <spam>Masculino</spam>
+            }
+
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fecha_Registro)
+            Fecha de Registro
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fecha_Registro)
+            @Model.Fecha_Registro.ToShortDateString()
         </dd>
 
     </dl>

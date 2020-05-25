@@ -20,11 +20,11 @@ namespace CRUD_Alumnos.Controllers
                 }
 
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 throw;
-            }            
+            }
         }
 
         public ActionResult Agregar()
@@ -49,25 +49,30 @@ namespace CRUD_Alumnos.Controllers
                     db.SaveChanges();
                     return RedirectToAction("IndexdeAlumno");
                 }
-                
+
             }
             catch (Exception e)
-            {              
-                ModelState.AddModelError("","Error al Crear Alumno"+ e.Message);
+            {
+                ModelState.AddModelError("", "Error al Crear Alumno" + e.Message);
                 return View();
             }
-           
+
         }
 
         public ActionResult ListaCiudades()
         {
-            using(var db = new AlumnoContexto())
+            using (var db = new AlumnoContexto())
             {
-                return PartialView(db.Alumno.ToString());
+                return PartialView(db.Ciudad.ToList());
             }
         }
 
-        
+        public ActionResult Agregar2()
+        {
+            return View();
+        }
+
+
         [HttpGet]
         public ActionResult Editar(int id)
         {
@@ -86,8 +91,8 @@ namespace CRUD_Alumnos.Controllers
 
                 throw;
             }
-            
-          
+
+
         }
 
         [HttpPost]
@@ -100,7 +105,7 @@ namespace CRUD_Alumnos.Controllers
 
             try
             {
-                using(var db = new AlumnoContexto())
+                using (var db = new AlumnoContexto())
                 {
                     var al = db.Alumno.Find(a.id);
                     al.Nombres = a.Nombres;
@@ -111,34 +116,43 @@ namespace CRUD_Alumnos.Controllers
 
                     return RedirectToAction("IndexdeAlumno");
                 }
-                
+
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
+
         }
 
         public ActionResult DetallesUsuario(int id)
         {
-            using(var db = new AlumnoContexto())
+            using (var db = new AlumnoContexto())
             {
                 var al = db.Alumno.Find(id);
                 return View(al);
             }
-            
+
         }
 
         public ActionResult EliminarUsuario(int id)
         {
-            using (var db = new AlumnoContexto() )
+            using (var db = new AlumnoContexto())
             {
                 Alumno al = db.Alumno.Find(id);
                 db.Alumno.Remove(al);
                 db.SaveChanges();
                 return RedirectToAction("IndexdeAlumno");
+            }
+        }
+
+        public static String NombreCiudad(int CodCiudad)
+        {
+            using (var db = new AlumnoContexto())
+            {
+                String nombre = db.Ciudad.Find(CodCiudad).Nombre;
+                return nombre;
             }
         }
 

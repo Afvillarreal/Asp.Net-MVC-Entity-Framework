@@ -24,7 +24,12 @@ namespace CRUD_Alumnos.Models
 
         [Required]
         [Display(Name = "Ingrese Sexo")]
-        public string Sexo { get; set; }   
+        public string Sexo { get; set; }
+
+        [Required]
+        [Display(Name = "Ciudad")]
+        public int CodCiudad { get; set; }
+
     }
 
     //[MetadataType(typeof(AlumnoProtec))]

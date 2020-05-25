@@ -27,40 +27,57 @@
         <th>
             @Html.DisplayNameFor(model => model.Fecha_Registro)
         </th>
+
+        <th>
+            Ciudad
+        </th>
+
+
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Apellidos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Edad)
-        </td>
-        <td>
-            @if (item.Sexo == "F")
-            {
-                <spam>Femenino</spam>
-            }
-            else
-            {
-                <spam>Masculino</spam>
-            }
-           
-        </td>
-        <td>
-                @item.Fecha_Registro.ToShortDateString()
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Editar", new { id=item.id }) |
-            @Html.ActionLink("Detalles", "DetallesUsuario", new { id=item.id }) |
-            @Html.ActionLink("Eliminar", "EliminarUsuario", new { id=item.id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nombres)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Apellidos)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Edad)
+    </td>
+    <td>
+        @if (item.Sexo == "F")
+        {
+            <spam>Femenino</spam>
+        }
+        else
+        {
+            <spam>Masculino</spam>
+        }
+
+    </td>
+
+    <td>
+        @item.Fecha_Registro.ToShortDateString()
+    </td>
+
+    <td>
+        @CRUD_Alumnos.Controllers.AlumnoController.NombreCiudad(item.CodCiudad) 
+    </td>
+
+
+    <td>
+        @Html.ActionLink("Editar", "Editar", new { id = item.id }) |
+        @Html.ActionLink("Detalles", "DetallesUsuario", new { id = item.id }) |
+        @Html.ActionLink("Eliminar", "EliminarUsuario", new { id = item.id })
+    </td>
+
+
+
+</tr>
 }
 
 </table>

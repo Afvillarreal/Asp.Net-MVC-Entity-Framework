@@ -14,7 +14,16 @@ namespace CRUD_Alumnos.Models
     
     public partial class Ciudad
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Ciudad()
+        {
+            this.Alumno = new HashSet<Alumno>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alumno> Alumno { get; set; }
     }
 }

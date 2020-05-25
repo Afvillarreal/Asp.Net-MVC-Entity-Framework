@@ -20,5 +20,8 @@ namespace CRUD_Alumnos.Models
         public int Edad { get; set; }
         public string Sexo { get; set; }
         public System.DateTime Fecha_Registro { get; set; }
+        public int CodCiudad { get; set; }
+    
+        public virtual Ciudad Ciudad { get; set; }
     }
 }
