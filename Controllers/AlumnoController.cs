@@ -58,6 +58,15 @@ namespace CRUD_Alumnos.Controllers
             }
            
         }
+
+        public ActionResult ListaCiudades()
+        {
+            using(var db = new AlumnoContexto())
+            {
+                return PartialView(db.Alumno.ToString());
+            }
+        }
+
         
         [HttpGet]
         public ActionResult Editar(int id)
@@ -129,13 +138,9 @@ namespace CRUD_Alumnos.Controllers
                 Alumno al = db.Alumno.Find(id);
                 db.Alumno.Remove(al);
                 db.SaveChanges();
-                return View("IndexdeAlumno");
+                return RedirectToAction("IndexdeAlumno");
             }
         }
-
-
-
-
 
     }
 }
