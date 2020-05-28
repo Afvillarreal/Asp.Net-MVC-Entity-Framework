@@ -12,6 +12,8 @@ se utiliza la primary key de ciudad para identificar a cual ciudad pertence cada
 el patron (MVC) de alumno permite Editar-eliminar-detalles para cada uno de los alumnos y crer uno nuevo usando Html y razor, por medio de tokens tambien se valida que el combo del nuevo alumno sea correcto garantizando el encapsulamiento.  
 <img src = "Imagenes/Lista.PNG">
 <img src = "Imagenes/editar.PNG">
+
+
 se hizo uso de Linq para realizar las busquedas y modificaciones en la base
 
 ```
