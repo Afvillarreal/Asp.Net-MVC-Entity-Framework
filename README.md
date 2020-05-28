@@ -3,4 +3,4 @@ Asp.Net MVC + Entity Framework + SQL SERVER
 
 #Proyecto alumno
 
-<img src = "imagenes/Lista.PNG">
+<img src = "Imagenes/Lista.PNG">
